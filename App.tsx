@@ -57,7 +57,7 @@ function Content(props: any) {
       const itemsInWin = possibleWinPos.map(i => items[i]);
       const win = itemsInWin.every(item => item === itemsInWin[0] && item);
       if (win) {
-        console.log(`Win: ${possibleWinPos} - ${itemsInWin}`);
+        console.log(`Win: ${possibleWinPos} - ${items}`);
         return true;
       }
     }
@@ -67,11 +67,6 @@ function Content(props: any) {
     }
     else {
       console.log(`Draw: ${items}`);
-      console.group();
-      for (const item of items) {
-        console.log(`  ${item} - ${item === null}`);
-      }
-      console.groupEnd();
       return "draw";
     }
   }
