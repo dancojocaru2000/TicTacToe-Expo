@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import Board from './Board';
 import TopBar from './TopBar';
 import { arrayReplace, normalizeFontSize } from './utils';
@@ -121,15 +122,17 @@ function Content(props: any) {
     }
   }
 
-  // Dimensions.addEventListener('change', _ => {
-  //   setItems(getDefaultItems());
-  // });
+  function onResetPress() {
+    setItems(getDefaultItems());
+    setMoving(GameState.movingX);
+  }
 
   return (
     <View style={[style, ]}>
       <View style={styles.boardView}>
         <Text style={styles.gameState}>{getGameStateString(moving)}</Text>
         <Board columns={3} rows={3} items={items} onItemPress={onItemPress}/>
+        <Button onPress={onResetPress}>Reset</Button>
       </View>
     </View>
   );
