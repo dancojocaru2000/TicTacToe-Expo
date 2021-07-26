@@ -2,9 +2,10 @@ import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Square from "./Square";
 import { array2Dfy, clamp, normalizeFontSize } from "./utils";
+import Svg, { Line } from 'react-native-svg';
 
 export default function Board(props: BoardProps) {
-	const { style, rows, columns, onItemPress } = props;
+	const { style, rows, columns, onItemPress, winIdx } = props;
 
 	function _onItemPress(row: number, column: number) {
 		const idx = row * columns + column;
@@ -23,9 +24,65 @@ export default function Board(props: BoardProps) {
 		);
 	});
 
+	function getWinLineCoords() {
+		if (!winIdx && winIdx !== 0) {
+			return;
+		}
+
+		if (0 <= winIdx && winIdx <= 2) {
+			const ys = [17, 50, 83]
+			return {
+				x1: 5,
+				y1: ys[winIdx],
+				x2: 95,
+				y2: ys[winIdx],
+			};
+		}
+		else if (3 <= winIdx && winIdx <= 5) {
+			const xs = [17, 50, 83]
+			return {
+				x1: xs[winIdx - 3],
+				y1: 5,
+				x2: xs[winIdx - 3],
+				y2: 95,
+			};
+		}
+		else if (winIdx === 6) {
+			return {
+				x1: 5,
+				y1: 5,
+				x2: 95,
+				y2: 95,
+			}
+		}
+		else {
+			return {
+				x1: 95,
+				y1: 5,
+				x2: 5,
+				y2: 95,
+			}
+		}
+	}
+
+	function getWinLine() {
+		const coords = getWinLineCoords();
+		if (!coords) {
+			return;
+		}
+		return (
+			<Line stroke="black" opacity={1} {...coords}/>
+		)
+	}
+
 	return (
 		<View style={[style, styles.board]}>
 			{renderItems}
+			<View style={{position: "absolute", top: 0, left: 0, right: 0, bottom: 0}} pointerEvents="box-none">
+				<Svg style={{}} width="100%" height="100%" viewBox="0 0 100 100">
+					{getWinLine()}
+				</Svg>
+			</View>
 		</View>
 	);
 }
@@ -36,6 +93,7 @@ type BoardProps = {
 	columns: number,
 	items: Array<string | null>,
 	onItemPress: (idx: number) => void,
+	winIdx?: number,
 }
 
 const styles = StyleSheet.create({

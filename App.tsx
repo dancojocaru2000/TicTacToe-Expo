@@ -26,6 +26,7 @@ function Content(props: any) {
   const { style } = props;
   const [items, setItems] = useState(getDefaultItems() as Array<string | null>);
   const [moving, setMoving] = useState(GameState.movingX);
+  const [winIdx, setWinIdx] = useState(undefined as number | undefined);
   const getGameStateString = (state: GameState) => {
     switch (moving) {
       case GameState.movingX:
@@ -53,11 +54,12 @@ function Content(props: any) {
       [2, 4, 6],
     ];
 
-    for (const possibleWinPos of possibleWinPositions) {
+    for (const [idx, possibleWinPos] of possibleWinPositions.entries()) {
       const itemsInWin = possibleWinPos.map(i => items[i]);
-      const win = itemsInWin.every(item => item === itemsInWin[0] && item);
+      const win = itemsInWin.every(item => item && item === itemsInWin[0]);
       if (win) {
         console.log(`Win: ${possibleWinPos} - ${items}`);
+        setWinIdx(idx);
         return true;
       }
     }
@@ -120,13 +122,14 @@ function Content(props: any) {
   function onResetPress() {
     setItems(getDefaultItems());
     setMoving(GameState.movingX);
+    setWinIdx(undefined);
   }
 
   return (
     <View style={[style, ]}>
       <View style={styles.boardView}>
         <Text style={styles.gameState}>{getGameStateString(moving)}</Text>
-        <Board columns={3} rows={3} items={items} onItemPress={onItemPress}/>
+        <Board columns={3} rows={3} items={items} onItemPress={onItemPress} winIdx={winIdx}/>
         <Button onPress={onResetPress}>Reset</Button>
       </View>
     </View>
