@@ -33,7 +33,6 @@ export function GamesList(props: GamesListProps) {
 
 	type RenderItemType = Game & { [GAME_INDEX_SYMBOL]: number };
 	const renderItem = ({ item }: {item:RenderItemType}) => {
-		console.log(item)
 		const title = `Game ${item[GAME_INDEX_SYMBOL] + 1}`;
 		const subtitle = (() => {
 			switch (item.state) {
