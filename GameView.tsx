@@ -5,6 +5,7 @@ import { ActivityIndicator, Button, Text } from 'react-native-paper';
 import Board from './Board';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { actions as gamesActions, gameIdSelector, gamesSelector } from './reducers/games';
+import { boardFromGame } from './types/game';
 import { assertNotNull, assertNotUndefined, normalizeFontSize } from './utils';
 
 export function GameView(props: any) {
@@ -74,14 +75,7 @@ export function GameView(props: any) {
 
   const isInteractive = gameStep === "latest" && currentGame.state.startsWith("moving");
 
-  const items = (() => {
-    const result = Array(9).fill(null);
-    const moves = gameStep === "latest" ? currentGame.moves : currentGame.moves.slice(0, gameStep as number);
-    for (const [position, value] of moves) {
-      result[position] = value;
-    }
-    return result;
-  })();
+  const items = boardFromGame(currentGame, gameStep === "latest" ? undefined : gameStep as number);
 
   const newGameButton = (() => {
     if (currentGame.moves.length === 0) {

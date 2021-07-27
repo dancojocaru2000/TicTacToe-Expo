@@ -19,8 +19,8 @@ export function array2Dfy<T>(normalArray: Array<T>, itemsPerRow: number) : Array
 	return result;
 }
 
-export function normalizeFontSize(fontSize: number, { maxWidth, maxFontSize }: { maxWidth?: number, maxFontSize?: number } = {}): number {
-	const screenWidth = clamp(Dimensions.get('window').width, {max: maxWidth});
+export function normalizeFontSize(fontSize: number, { maxWidth, maxFontSize, replacementWidth }: { maxWidth?: number, maxFontSize?: number, replacementWidth?: number } = {}): number {
+	const screenWidth = clamp(replacementWidth ?? Dimensions.get('window').width, {max: maxWidth});
 	// const screenWidth = Dimensions.get('window').width;
 	const scale = screenWidth / 320; // magic number time!; obtained from: https://stackoverflow.com/questions/33628677/react-native-responsive-font-size
 	const newSize = fontSize * scale;

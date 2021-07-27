@@ -1,15 +1,30 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, LayoutChangeEvent } from "react-native";
 import { normalizeFontSize } from "./utils";
 
 export default function Square(props: SquareProps) {
-	const { style, value, onPress } = props;
+	const { style, value, onPress, smallFont } = props;
+
+	const styles = StyleSheet.create({
+		square: {
+			padding: smallFont ? 2 : 8,
+			borderWidth: 2,
+			flex: 1,
+			aspectRatio: 1,
+			justifyContent: "center",
+			alignItems: "center",
+		},
+		text: {
+			fontSize: normalizeFontSize(smallFont ? 10 : 36, {maxWidth: 600 }),
+		},
+	})
 
 	const content = (
 		<Text style={styles.text}>{value}</Text>
 	);
 
-	if (value) {
+	if (value || !onPress) {
 		return (
 			<View style={[style, styles.square]}>
 				{content}
@@ -31,18 +46,5 @@ type SquareProps = {
 	style?: any,
 	value: string | null,
 	onPress?: () => void,
+	smallFont?: boolean,
 }
-
-const styles = StyleSheet.create({
-	square: {
-		padding: 8,
-		borderWidth: 2,
-		flex: 1,
-		aspectRatio: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	text: {
-		fontSize: normalizeFontSize(36, {maxWidth: 600,}),
-	},
-})

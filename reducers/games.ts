@@ -1,5 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store"
+import { Game } from "../types/game"
 
 interface GamesState {
     games: Array<Game>,
