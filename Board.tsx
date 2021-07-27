@@ -5,18 +5,25 @@ import { array2Dfy, clamp, normalizeFontSize } from "./utils";
 import Svg, { Line } from 'react-native-svg';
 
 export default function Board(props: BoardProps) {
-	const { style, rows, columns, onItemPress, winIdx } = props;
+	const { style, rows, columns, onItemPress, winIdx, interactive } = props;
 
 	function _onItemPress(row: number, column: number) {
+		if (!onItemPress) return;
 		const idx = row * columns + column;
 		onItemPress(idx);
 	}
 
 	const items = array2Dfy(props.items, columns);
 	const renderItems = items.map((row, rIdx) => {
-		const renderRow = row.map((item, iIdx) => (
-			<Square style={styles.squares} key={`${rIdx}-${iIdx}`} value={item} onPress={() => _onItemPress(rIdx, iIdx)} />
-		));
+		const renderRow = row.map((item, iIdx) => {
+			const onPressProp = {} as { onPress?: () => void };
+			if (interactive) {
+				onPressProp.onPress = () => _onItemPress(rIdx, iIdx);
+			}
+			return (
+				<Square style={styles.squares} key={`${rIdx}-${iIdx}`} value={item} {...onPressProp} />
+			)
+		});
 		return (
 			<View key={`${rIdx}-row`} style={styles.row}>
 				{renderRow}
@@ -92,8 +99,9 @@ type BoardProps = {
 	rows: number,
 	columns: number,
 	items: Array<string | null>,
-	onItemPress: (idx: number) => void,
-	winIdx?: number,
+	onItemPress?: (idx: number) => void,
+	winIdx?: number | null,
+	interactive: boolean,
 }
 
 const styles = StyleSheet.create({

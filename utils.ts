@@ -54,3 +54,15 @@ export function arrayReplace<T>(array: Array<T>, replaceWith: Array<[number, T]>
 	}
 	return array;
 }
+
+export function assertNotUndefined<T>(value: T | undefined): asserts value {
+	if (value === undefined) {
+		throw new Error("Value must be defined!");
+	}
+}
+
+export function assertNotNull<T>(value: T | null): asserts value is T {
+	if (value === null) {
+		throw new Error("Value is null!");
+	}
+}

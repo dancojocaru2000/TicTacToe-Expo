@@ -30,7 +30,7 @@ export default function Square(props: SquareProps) {
 type SquareProps = {
 	style?: any,
 	value: string | null,
-	onPress: () => void,
+	onPress?: () => void,
 }
 
 const styles = StyleSheet.create({
