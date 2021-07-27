@@ -25,19 +25,19 @@ function Content(props: any) {
 
   const { style } = props;
   const [items, setItems] = useState(getDefaultItems() as Array<string | null>);
-  const [moving, setMoving] = useState(GameState.movingX);
+  const [moving, setMoving] = useState("movingX" as GameState);
   const [winIdx, setWinIdx] = useState(undefined as number | undefined);
   const getGameStateString = (state: GameState) => {
     switch (moving) {
-      case GameState.movingX:
+      case "movingX":
         return "X is moving";
-      case GameState.movingO:
+      case "movingO":
         return "O is moving";
-      case GameState.winX:
+      case "winX":
         return "X wins!";
-      case GameState.winO:
+      case "winO":
         return "O wins!";
-      case GameState.draw:
+      case "draw":
         return "Draw";
     }
   };
@@ -77,26 +77,26 @@ function Content(props: any) {
     const win = checkWin();
     if (win == true) {
       switch (moving) {
-        case GameState.movingX:
-          setMoving(GameState.winX);
+        case "movingX":
+          setMoving("winX");
           break;
-        case GameState.movingO:
-          setMoving(GameState.winO);
+        case "movingO":
+          setMoving("winO");
           break;
         default:
           throw Error(`Invalid state: cannot win from ${moving} state`);
       }
     }
     else if (win == "draw") {
-      setMoving(GameState.draw);
+      setMoving("draw");
     }
     else {
       switch (moving) {
-        case GameState.movingX:
-          setMoving(GameState.movingO);
+        case "movingX":
+          setMoving("movingO");
           break;
-        case GameState.movingO:
-          setMoving(GameState.movingX);
+        case "movingO":
+          setMoving("movingX");
           break;
         default:
           throw Error(`Invalid state: cannot continue game from ${moving} state`);
@@ -106,11 +106,11 @@ function Content(props: any) {
 
   function onItemPress(idx: number) {
     switch (moving) {
-      case GameState.movingX:
+      case "movingX":
         setItems(arrayReplace(items, [idx, 'X']));
         updateGameState();
         break;
-      case GameState.movingO:
+      case "movingO":
         setItems(arrayReplace(items, [idx, 'O']));
         updateGameState();
         break;
@@ -121,7 +121,7 @@ function Content(props: any) {
 
   function onResetPress() {
     setItems(getDefaultItems());
-    setMoving(GameState.movingX);
+    setMoving("movingX");
     setWinIdx(undefined);
   }
 
@@ -160,11 +160,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-enum GameState {
-  movingX,
-  movingO,
-  winX,
-  winO,
-  draw
-}
