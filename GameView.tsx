@@ -11,7 +11,7 @@ import { assertNotNull, assertNotUndefined, normalizeFontSize } from './utils';
 export function GameView(props: any) {
   const { style } = props;
 
-  // region Hooks
+  // #region Hooks
 
   const gameId = useAppSelector(gameIdSelector);
   const [gameStep, setGameStep] = useState("latest" as string | number);
@@ -19,9 +19,9 @@ export function GameView(props: any) {
   const games = useAppSelector(gamesSelector);
   const currentGame = useAppSelector(state => state.games.games.find(game => game.id === gameId))
   
-  // endregion
+  // #endregion
 
-  // region Initialization
+  // #region Initialization
 
   // If no games are started, start a new one
   if (games.length === 0) {
@@ -45,7 +45,7 @@ export function GameView(props: any) {
   // Since a game is selected (gameId !== null), there should be a currentGame
   assertNotUndefined(currentGame);
 
-  // endregion
+  // #endregion
 
   const gameStateString = (() => {
     switch (currentGame.state) {
