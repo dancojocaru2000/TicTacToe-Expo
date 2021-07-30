@@ -16,9 +16,9 @@ export const gamesSlice = createSlice({
 	name: 'games',
 	initialState,
 	reducers: {
-		newGame: {
+		newLocalGame: {
 			reducer: (state, action) => {
-				const game = action.payload.game as Game
+                const game = action.payload.game as Game
                 state.games.push(game)
                 if (action.payload.moveToNewGame) {
                     state.currentGameId = game.id;
@@ -35,6 +35,10 @@ export const gamesSlice = createSlice({
                             moves: [],
                             startTime: now.toISOString(),
                             winIdx: null,
+                            players: {
+                                X: "offline",
+                                O: "offline",
+                            },
                         } as Game,
                         moveToNewGame,
 					},

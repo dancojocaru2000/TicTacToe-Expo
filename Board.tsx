@@ -111,7 +111,7 @@ type BoardProps = {
 const styles = StyleSheet.create({
 	board: {
 		padding: 8,
-		maxWidth: clamp(600, {max: Dimensions.get('window').height - 200}),
+		maxWidth: clamp(600, {max: Dimensions.get('window').height - 300}),
 		width: '100%',
 	},
 	row: {

@@ -18,6 +18,7 @@ export function GameView(props: any) {
   const dispatch = useAppDispatch();
   const games = useAppSelector(gamesSelector);
   const currentGame = useAppSelector(state => state.games.games.find(game => game.id === gameId))
+  const loggedInState = useAppSelector(state => state.me.state);
   
   // #endregion
 
@@ -25,7 +26,7 @@ export function GameView(props: any) {
 
   // If no games are started, start a new one
   if (games.length === 0) {
-    dispatch(gamesActions.newGame(true));
+    dispatch(gamesActions.newLocalGame(true));
     return (
       <View style={[style, styles.gameView]}>
         <Text>Creating new game...</Text>
@@ -70,7 +71,7 @@ export function GameView(props: any) {
   }
 
   function onNewGamePress() {
-    dispatch(gamesActions.newGame(true));
+    dispatch(gamesActions.newLocalGame(true));
   }
 
   const isInteractive = gameStep === "latest" && currentGame.state.startsWith("moving");
@@ -81,8 +82,9 @@ export function GameView(props: any) {
     if (currentGame.moves.length === 0) {
       return;
     }
+    const text = loggedInState === "loggedIn" ? "New Local Game" : "New Game";
     return (
-      <Button onPress={onNewGamePress}>New Game</Button>
+      <Button style={{margin: 8}} mode="outlined" onPress={onNewGamePress}>{text}</Button>
     );
   })();
 

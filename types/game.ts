@@ -4,6 +4,10 @@ export interface Game {
 	moves: Array<[number, "X" | "O"]>,
 	startTime: string,
 	winIdx: number | null,
+	players: {
+		X: string,
+		O: string,
+	},
 }
 
 export function boardFromGame(game: Game, gameStep?: number): Array<"X" | "O" | null> {

@@ -66,3 +66,31 @@ export function assertNotNull<T>(value: T | null): asserts value is T {
 		throw new Error("Value is null!");
 	}
 }
+
+export function promiseTimeout(millis: number) {
+	return new Promise((accept) => setTimeout(accept, millis));
+}
+
+export function debounceLast<P extends unknown[], Fn extends (...any: P) => any>(fn: Fn, millis: number): (...args: P) => void {
+	let timeoutHandle: ReturnType<typeof setTimeout> | null = null;
+
+	return (...args: P) => {
+		if (timeoutHandle !== null) {
+			clearTimeout(timeoutHandle);
+		}
+		timeoutHandle = setTimeout(() => {
+			fn.apply(null, args);
+		}, millis);
+	};
+}
+
+export function debounceFirst<P extends unknown[], Fn extends (...any: P) => any>(fn: Fn, millis: number): (...args: P) => void {
+	let lastRunDate: number | null = null;
+
+	return (...args: P) => {
+		if (lastRunDate === null || Date.now() - lastRunDate >= millis) {
+			fn.apply(null, args);
+			lastRunDate = Date.now();
+		}
+	};
+}

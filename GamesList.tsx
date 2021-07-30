@@ -50,13 +50,20 @@ export function GamesList(props: GamesListProps) {
 		})();
 		const date = `Started at ${new Date(Date.parse(item.startTime)).toLocaleString()}`;
 		const selected = item.id === currentGameId;
-		const selectedStyle = (() => {
-			if (!selected) return [];
-			return [styles.selected];
+		const backgroundStyle = (() => {
+			if (selected) {
+				return [styles.selected];
+			}
+			else if (item.state.startsWith('moving')) {
+				return [styles.ongoing];
+			}
+			else {
+				return [];
+			}
 		})();
 
 		const content = (
-			<Card style={[styles.item, ...selectedStyle]}>
+			<Card style={[styles.item, ...backgroundStyle]}>
 				<Text style={styles.cardTitle}>{title}</Text>
 				<Text style={styles.cardSubtitle}>{subtitle}</Text>
 				<Text style={styles.cardDetailText}>{date}</Text>
@@ -92,7 +99,7 @@ const styles = StyleSheet.create({
 	},
 	item: {
 		padding: 8,
-		margin: 16,
+		margin: 8,
 		minHeight: 174
 	},
 	cardTitle: {
@@ -111,6 +118,9 @@ const styles = StyleSheet.create({
 	},
 	selected: {
 		backgroundColor: "#B3E5FC",
+	},
+	ongoing: {
+		backgroundColor: "#DCEDC8",
 	}
 });
 
