@@ -12,7 +12,7 @@ import { actions as appActions } from '../reducers/app';
 import { normalizeFontSize } from "../utils";
 import { LeaderboardView } from "./LeaderboardView";
 import { sagaActions } from "../sagas";
-import { LoadingView } from "../LoadingView";
+import { LoadingView } from "../utilViews/LoadingView";
 import { LoginCodeView } from "./LoginCodeView";
 
 export function LoggedInView(props: LoggedInViewProps) {

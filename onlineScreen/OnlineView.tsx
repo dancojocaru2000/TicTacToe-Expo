@@ -1,14 +1,14 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { ActivityIndicator, Button, Divider, Text, TextInput } from "react-native-paper";
-import { normalizeFontSize } from "./utils";
+import { normalizeFontSize } from "../utils";
 import { useState } from "react";
-import { nickRegexSelector } from "./reducers/meta";
-import { LoggedInView } from './online/OnlineLoggedView';
+import { nickRegexSelector } from "../reducers/meta";
+import { LoggedInView } from './OnlineLoggedView';
 import { useEffect } from "react";
-import { AppManager } from "./App";
-import { sagaActions } from "./sagas";
+import { AppManager } from "../App";
+import { sagaActions } from "../sagas";
 
 export function OnlineView(props: OnlineViewProps) {
 	const { appManager } = props;

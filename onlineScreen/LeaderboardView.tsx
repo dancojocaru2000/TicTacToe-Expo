@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { LoadingView } from "../LoadingView";
+import { LoadingView } from "../utilViews/LoadingView";
 import { userIdSelector } from "../reducers/me";
 import { usersSelector, usersStateSelector } from "../reducers/users";
 import { sagaActions } from "../sagas";

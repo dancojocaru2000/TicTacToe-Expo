@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Square from "./Square";
-import { array2Dfy, clamp, normalizeFontSize } from "./utils";
+import { array2Dfy, clamp, normalizeFontSize } from "../utils";
 import Svg, { Line } from 'react-native-svg';
 
 export default function Board(props: BoardProps) {

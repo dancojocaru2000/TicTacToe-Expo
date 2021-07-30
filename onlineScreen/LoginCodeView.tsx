@@ -3,7 +3,7 @@ import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Colors, ProgressBar, Text } from "react-native-paper";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { LoadingView } from "../LoadingView";
+import { LoadingView } from "../utilViews/LoadingView";
 import { actions as meActions, loginCodeSelector } from "../reducers/me";
 import { sagaActions } from "../sagas";
 import { normalizeFontSize } from "../utils";

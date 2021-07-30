@@ -4,11 +4,11 @@ import { StyleSheet, View } from 'react-native';
 import { Provider as ReduxProvider } from 'react-redux';
 import { storePromise } from './store';
 import TopBar from './TopBar';
-import { GameView } from './GameView';
+import { GameView } from './gameScreen/GameView';
 import { BottomNavigation } from 'react-native-paper';
 import { useState } from 'react';
-import { GamesList } from './GamesList';
-import { OnlineView } from './OnlineView';
+import { GamesList } from './historyScreen/GamesList';
+import { OnlineView } from './onlineScreen/OnlineView';
 import { debounceFirst } from './utils';
 import { useEffect } from 'react';
 

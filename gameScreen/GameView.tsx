@@ -2,11 +2,11 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Text } from 'react-native-paper';
-import Board from './Board';
-import { useAppDispatch, useAppSelector } from './hooks';
-import { actions as gamesActions, gameIdSelector, gamesSelector } from './reducers/games';
-import { boardFromGame } from './types/game';
-import { assertNotNull, assertNotUndefined, normalizeFontSize } from './utils';
+import Board from '../utilViews/Board';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { actions as gamesActions, gameIdSelector, gamesSelector } from '../reducers/games';
+import { boardFromGame } from '../types/game';
+import { assertNotNull, assertNotUndefined, normalizeFontSize } from '../utils';
 
 export function GameView(props: any) {
   const { style } = props;

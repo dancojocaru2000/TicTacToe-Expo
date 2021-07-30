@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator, Text } from "react-native-paper";
-import { normalizeFontSize } from "./utils";
+import { normalizeFontSize } from "../utils";
 
 export function LoadingView(props: LoadingViewProps) {
 	const loadingText = props.loadingText ?? 'Loading...';

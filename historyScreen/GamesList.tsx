@@ -1,11 +1,11 @@
 import React from "react";
 import { View, StyleSheet, FlatList, TouchableOpacityBase, TouchableOpacity } from "react-native";
 import { Card, Text } from 'react-native-paper';
-import Board from "./Board";
-import { useAppDispatch, useAppSelector } from "./hooks";
-import { actions as gamesActions, gameIdSelector, gamesSelector } from "./reducers/games";
-import { boardFromGame, Game } from "./types/game";
-import { normalizeFontSize } from "./utils";
+import Board from "../utilViews/Board";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { actions as gamesActions, gameIdSelector, gamesSelector } from "../reducers/games";
+import { boardFromGame, Game } from "../types/game";
+import { normalizeFontSize } from "../utils";
 
 const GAME_INDEX_SYMBOL = Symbol("GameIndex");
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, LayoutChangeEvent } from "react-native";
-import { normalizeFontSize } from "./utils";
+import { normalizeFontSize } from "../utils";
 
 export default function Square(props: SquareProps) {
 	const { style, value, onPress, smallFont } = props;
