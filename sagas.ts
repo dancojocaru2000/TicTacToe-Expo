@@ -15,7 +15,7 @@ function* fetchNickRegex(action: Action<"FETCH_NICK_REGEX">) {
 	catch (e) { console.error(e) }
 }
 
-function* signUp(action: Action<"SIGN_UP"> & { nickname: string }) {
+function* signUp(action: SignUpAction) {
 	const headers = {} as { [s: string]: string };
 	const slowMode = (yield select(slowModeSelector)) as boolean;
 	if (slowMode) {
@@ -36,7 +36,7 @@ function* signUp(action: Action<"SIGN_UP"> & { nickname: string }) {
 	catch (e) { console.error(e) }
 }
 
-function* codeLogIn(action: Action<"CODE_LOG_IN"> & { code: string }) {
+function* codeLogIn(action: CodeLogInAction) {
 	const headers = {} as { [s: string]: string };
 	const slowMode = (yield select(slowModeSelector)) as boolean;
 	if (slowMode) {
@@ -144,3 +144,6 @@ export const sagaActions = {
 	fetchUsers: () => ({ type: "FETCH_USERS" }),
 	getLoginCode: () => ({ type: "GET_LOGIN_CODE" }),
 };
+
+type SignUpAction = Action<"SIGN_UP"> & { nickname: string };
+type CodeLogInAction = Action<"CODE_LOG_IN"> & { code: string };
