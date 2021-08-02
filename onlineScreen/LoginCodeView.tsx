@@ -13,7 +13,6 @@ export function LoginCodeView(props: LoginCodeViewProps) {
 
 	const dispatch = useAppDispatch();
 	const loginCode = useAppSelector(loginCodeSelector);
-	const [componentStartDate, setComponentStartDate] = useState(Date.now());
 	const [progress, setProgress] = useState(0);
 
 	useEffect(() => {
@@ -27,16 +26,10 @@ export function LoginCodeView(props: LoginCodeViewProps) {
 	}, [loginCode]);
 
 	useEffect(() => {
-		if (loginCode && loginCode !== "loading") {
-			setComponentStartDate(Date.now());
-		}
-	}, [loginCode]);
-
-	useEffect(() => {
 		const intervalHandle = setInterval(() => {
 			if (loginCode && loginCode !== "loading") {
-				const total = loginCode.expiryDate.getTime() - componentStartDate;
-				const partial = Date.now() - componentStartDate;
+				const total = loginCode.expiryDate.getTime() - loginCode.issueDate.getTime();
+				const partial = Date.now() - loginCode.issueDate.getTime();
 				const progress = total === 0 ? 0 : partial / total;
 				setProgress(progress);
 			}
