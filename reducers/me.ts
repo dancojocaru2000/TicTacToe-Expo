@@ -12,6 +12,7 @@ interface MeState {
 	loginCode?: {
 		code: string,
 		expiryDate: Date,
+		issueDate: Date,
 	} | "loading",
 }
 
@@ -40,7 +41,7 @@ export const meSlice = createSlice({
 		loadingLogInCode: state => {
 			state.loginCode = "loading";
 		},
-		setLoginCode: (state, payload: PayloadAction<{ code: string, expiryDate: Date }>) => {
+		setLoginCode: (state, payload: PayloadAction<{ code: string, expiryDate: Date, issueDate: Date, }>) => {
 			state.loginCode = payload.payload;
 		},
 		resetLoginCode: (state, payload: PayloadAction<{ code: string, expiryDate: Date }>) => {
