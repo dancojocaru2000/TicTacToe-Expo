@@ -8,6 +8,7 @@ import appReducer from './reducers/app';
 import createSagaMiddleware from "@redux-saga/core";
 import rootSaga from "./sagas";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Unpromisify } from "./utils";
 
 const storeMe = AsyncStorage.getItem('/me');
 const storeDebug = AsyncStorage.getItem('/debug');
@@ -62,7 +63,6 @@ storePromise.then(store => store.subscribe(() => {
 }));
 
 // type StoreType = Parameters<Exclude<Parameters<typeof storePromise.then>[0], null | undefined>>[0];
-type Unpromisify<T> = T extends Promise<infer R> ? R : never;
 type StoreType = Unpromisify<typeof storePromise>;
 export type RootState = ReturnType<StoreType['getState']>;
 export type AppDispatch = StoreType['dispatch'];

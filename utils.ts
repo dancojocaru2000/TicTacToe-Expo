@@ -94,3 +94,5 @@ export function debounceFirst<P extends unknown[], Fn extends (...any: P) => any
 		}
 	};
 }
+
+export type Unpromisify<T> = T extends Promise<infer R> ? R : never;
