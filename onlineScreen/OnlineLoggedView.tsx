@@ -14,6 +14,7 @@ import { LeaderboardView } from "./LeaderboardView";
 import { sagaActions } from "../sagas";
 import { LoadingView } from "../utilViews/LoadingView";
 import { LoginCodeView } from "./LoginCodeView";
+import { LogOutView } from "./LogOutView";
 
 export function LoggedInView(props: LoggedInViewProps) {
 	const { style, appManager } = props;
@@ -44,6 +45,11 @@ export function LoggedInView(props: LoggedInViewProps) {
 			key: 'codeLogin',
 			title: 'Login Code',
 			content: <LoginCodeView goBack={() => setSelectedPage(null)} />,
+		},
+		{
+			key: 'logOut',
+			title: 'Log Out',
+			content: <LogOutView goBack={() => setSelectedPage(null)} />,
 		},
 	];
 
