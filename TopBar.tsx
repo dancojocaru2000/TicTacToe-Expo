@@ -1,25 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from "react-native";
+
 import { Appbar } from 'react-native-paper';
 
-export default function TopBar(props: TopBarProps) {
-	const { style, title, showBack, onBackTap } = props;
+const TopBar = function (props: TopBarProps): React.ReactElement {
+  const { style, title, showBack, onBackTap } = props;
 
-	const backButton = !showBack ? undefined : (
-		<Appbar.BackAction onPress={onBackTap} />
-	);
+  const backButton = !showBack ? undefined : (
+    <Appbar.BackAction onPress={onBackTap} />
+  );
 
-	return (
-		<Appbar.Header style={style}>
-			{backButton}
-			<Appbar.Content title={title}/>
-		</Appbar.Header>
-	);
-}
+  return (
+    <Appbar.Header style={style}>
+      {backButton}
+      <Appbar.Content title={title} />
+    </Appbar.Header>
+  );
+};
+export default TopBar;
 
 type TopBarProps = {
-	style: any,
-	title: string,
-	showBack: boolean,
-	onBackTap: () => void,
-}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  style: any;
+  title: string;
+  showBack: boolean;
+  onBackTap: () => void;
+};
